@@ -386,3 +386,4 @@ int cpu_boost_init(void)
 	ret = input_register_handler(&cpuboost_input_handler);
 	return 0;
 }
+late_initcall(cpu_boost_init);
