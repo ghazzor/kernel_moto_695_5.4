@@ -1,5 +1,7 @@
 #!/bin/bash
+[ ! -e " KernelSU-Next/kernel/setup.sh" ] && git submodule init && git submodule update
 [ ! -d "toolchain" ] && echo  "installing toolchain..." && bash init_clang.sh
+
 export KBUILD_BUILD_USER=ghazzor
 
 PATH=$PWD/toolchain/bin:$PATH
@@ -14,6 +16,18 @@ export ARCH=arm64
 if [ -z "$DEVICE" ]; then
 export DEVICE=g84
 fi
+
+if [[ -z "$KSU" || "$KSU" = "0" ]]; then
+KSU=0
+export KSUSTAT=
+elif [ "$KSU" = "1" ]; then
+CONFIG_KSU=ksu.config
+export KSUSTAT=_KSU
+else
+echo "Error: Set KSU to 0 or 1 to build"
+exit 1
+fi
+export KSU
 
 if [[ -z "$1" || "$1" = "-c" ]]; then
 echo "Clean Build"
@@ -46,7 +60,7 @@ LLVM=1
 LLVM_IAS=1
 '
 
-make ${ARGS} O=out ${DEVICE}_defconfig moto.config
+make ${ARGS} O=out ${DEVICE}_defconfig moto.config $CONFIG_KSU
 make ${ARGS} O=out -j$(nproc)
 
 [ ! -e "out/arch/arm64/boot/Image" ] && \
@@ -88,4 +102,4 @@ done
 
 #Zip
 cd ${AnyKernel3}
-zip -r9 O_KERNEL.${kmod}_${DEVICE}-${TIME}.zip * -x .git README.md *placeholder
+zip -r9 O_KERNEL.${kmod}_${DEVICE}${KSUSTAT}-${TIME}.zip * -x .git README.md *placeholder
