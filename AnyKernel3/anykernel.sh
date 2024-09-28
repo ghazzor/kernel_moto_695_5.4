@@ -11,7 +11,8 @@ do.systemless=0
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=fogos
-supported.versions=14.0
+device.name2=bangkk
+supported.versions=
 supported.patchlevels=
 '; } # end properties
 

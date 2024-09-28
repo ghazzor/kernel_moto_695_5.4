@@ -1,24 +1,24 @@
-                                       
-                 __ _________          
-                /  \\        \         
-               /    \\        \        
-              /      \\        \       
-             |        \\        \      
-              \        \\        \     
-               \        \\        \    
-                \        \\        \   
-                 \        \\ _______\  
-                / \        ||_______|   
-               /_/ \       //       /   
-              /_/   \     //       /    
-             /_/     \   //       /     
-            /_/       \_//_______/      
-           /_/                          
-          /_/                           
-         (__)                           
-                                        
-                -Mjolnir-               
-                                        
-                                        
-          -By @AnandSuresh02-           
-                                        
+                 _       ____  __  __  __  __________ ____  
+ _ __ ___   ___ | |_ ___/ ___||  \/  |/ /_|___ /___  | ___| 
+| '_ ` _ \ / _ \| __/ _ \___ \| |\/| | '_ \ |_ \  / /|___ \ 
+| | | | | | (_) | || (_) |__) | |  | | (_) |__) |/ /  ___) |
+|_| |_| |_|\___/ \__\___/____/|_|  |_|\___/____//_/  |____/ 
+ 
+DEVICE   : sm6375
+Version  : v0.1
+ 
+(.) Features:
+ - Wireguard
+ - KSU
+ - Full LTO
+ - Nuked some Debugging
+ - Enabled LLVM Polly, vDSO Compat
+ - Compiled with Neutron Clang 18.
+ - Other minor optimizations etc.
+
+(.) Trees: github.com/ghazzor/kernel_moto_695_5.4
+
+(.) Credits:
+ => base trees :@AnandSuresh02
+ => KSU : @whyakari
+ => kangs from other sm6375 trees
