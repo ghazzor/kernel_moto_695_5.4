@@ -2,6 +2,7 @@
 [ ! -e "KernelSU/kernel/setup.sh" ] && git submodule init && git submodule update
 [ ! -d "toolchain" ] && echo  "installing toolchain..." && bash init_clang.sh
 
+SECONDS=0
 export KBUILD_BUILD_USER=ghazzor
 
 PATH=$PWD/toolchain/bin:$PATH
@@ -112,3 +113,4 @@ done
 #Zip
 cd ${AnyKernel3}
 zip -r9 O_KERNEL.${kmod}_${DEVICE}${KSUSTAT}${testbld}-${TIME}.zip * -x .git README.md *placeholder
+ echo -e "\nCompleted in $((SECONDS / 60))m $((SECONDS % 60))s"
