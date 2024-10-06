@@ -30,18 +30,6 @@ exit 1
 fi
 export KSU
 
-if [[ -z "$T" || "$T" = "0" ]]; then
-T=0
-export testbld=
-elif [ "$T" = "1" ]; then
-CONFIG_TEST=test.config
-export testbld=-test
-else
-echo "Error: Set KSU to 0 or 1 to build"
-exit 1
-fi
-export T
-
 if [[ -z "$1" || "$1" = "-c" ]]; then
 echo "Clean Build"
 rm -rf out
@@ -112,5 +100,5 @@ done
 
 #Zip
 cd ${AnyKernel3}
-zip -r9 O_KERNEL.${kmod}_${DEVICE}${KSUSTAT}${testbld}-${TIME}.zip * -x .git README.md *placeholder
+zip -r9 O_KERNEL.${kmod}_${DEVICE}${KSUSTAT}-${TIME}.zip * -x .git README.md *placeholder
  echo -e "\nCompleted in $((SECONDS / 60))m $((SECONDS % 60))s"
