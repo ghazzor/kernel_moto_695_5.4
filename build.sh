@@ -4,7 +4,7 @@
 
 SECONDS=0
 export KBUILD_BUILD_USER=ghazzor
-
+export wkdir=$PWD
 PATH=$PWD/toolchain/bin:$PATH
 export LLVM_DIR=$PWD/toolchain/bin
 export LLVM=1
@@ -102,3 +102,7 @@ cp out/arch/arm64/boot/dtbo.img ${AnyKernel3}/dtbo.img
 cd ${AnyKernel3}
 zip -r9 O_KERNEL.${kmod}_${DEVICE}${KSUSTAT}-${TIME}.zip * -x .git README.md *placeholder
  echo -e "\nCompleted in $((SECONDS / 60))m $((SECONDS % 60))s"
+
+#upload to tg
+source $wkdir/local.config
+. $wkdir/tgup O_*.zip

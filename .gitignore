@@ -166,3 +166,4 @@ AnyKernel3/dtbo.img
 AnyKernel3/*.zip
 AnyKernel3/modules/*
 !.github
+local.config
