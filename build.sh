@@ -43,7 +43,7 @@ LLVM_NM='${LLVM_DIR}/llvm-nm'
 LLVM=1
 '
 
-make ${ARGS} O=out ${DEVICE}_defconfig
+make ${ARGS} O=out ${DEVICE}_defconfig moto.config
 make ${ARGS} O=out -j$(nproc)
 
 [ ! -e "out/arch/arm64/boot/Image" ] && \
