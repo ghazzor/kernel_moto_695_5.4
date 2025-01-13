@@ -32,6 +32,8 @@ ARCH=arm64
 AR='${LLVM_DIR}/llvm-ar'
 NM='${LLVM_DIR}/llvm-nm'
 AS='${LLVM_DIR}/llvm-as'
+CROSS_COMPILE='${LLVM_DIR}/aarch64-linux-gnu'
+CROSS_COMPILE_COMPAT='${LLVM_DIR}/arm-linux-gnueabi'
 OBJCOPY='${LLVM_DIR}/llvm-objcopy'
 OBJDUMP='${LLVM_DIR}/llvm-objdump'
 READELF='${LLVM_DIR}/llvm-readelf'
@@ -41,6 +43,7 @@ LLVM_AR='${LLVM_DIR}/llvm-ar'
 LLVM_DIS='${LLVM_DIR}/llvm-dis'
 LLVM_NM='${LLVM_DIR}/llvm-nm'
 LLVM=1
+LLVM_IAS=1
 '
 
 make ${ARGS} O=out ${DEVICE}_defconfig moto.config
