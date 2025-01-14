@@ -10,10 +10,10 @@ Version  : v0.1
 (.) Features:
  - Wireguard
  - KSU
- - Nuked lots of Debugging
+ - Full LTO
+ - Nuked some Debugging
  - Enabled LLVM Polly, vDSO Compat
  - Compiled with Neutron Clang 18.
- - Inlined everything (no modules)
  - Other minor optimizations etc.
 
 (.) Trees: github.com/ghazzor/kernel_moto_695_5.4
@@ -21,5 +21,4 @@ Version  : v0.1
 (.) Credits:
  => base trees :@AnandSuresh02
  => KSU : @whyakari
- => kanged stuff from @dereference23's trees
-
+ => kangs from other sm6375 trees
