@@ -12,7 +12,6 @@
  */
 
 #include <linux/gpio.h>
-#include <linux/touchscreen_mmi.h>
 #include <linux/regulator/consumer.h>
 #include "focaltech_core.h"
 #include "focaltech_ts_config.h"
@@ -614,7 +613,7 @@ static int fts_mmi_panel_state(struct device *dev,
 	struct fts_ts_platform_data *pdata;
 	struct fts_ts_data *ts_data;
 	int ret = 0;
-#if defined(CONFIG_FTS_DOUBLE_TAP_CONTROL)
+#if defined(CONFIG_BOARD_USES_DOUBLE_TAP_CTRL)
 	u8 gesture_command = 0;
 	unsigned char gesture_type = 0;
 #endif
@@ -624,7 +623,7 @@ static int fts_mmi_panel_state(struct device *dev,
 #ifdef FOCALTECH_SENSOR_EN
 	ts_data->zero_enable = 0;
 #endif
-
+#if defined(CONFIG_BOARD_USES_DOUBLE_TAP_CTRL)
 	switch (to) {
 		case TS_MMI_PM_DEEPSLEEP:
 			ret = fts_write_reg(FTS_REG_POWER_MODE, FTS_REG_POWER_MODE_SLEEP);
@@ -634,7 +633,6 @@ static int fts_mmi_panel_state(struct device *dev,
 			break;
 
 		case TS_MMI_PM_GESTURE:
-#if defined(CONFIG_FTS_DOUBLE_TAP_CONTROL)
 			if (ts_data->imports && ts_data->imports->get_gesture_type) {
 				ret = ts_data->imports->get_gesture_type(ts_data->dev, &gesture_type);
 			}
@@ -656,7 +654,6 @@ static int fts_mmi_panel_state(struct device *dev,
 
 			FTS_INFO("CLI GESTURE SWITCH command: %02x", gesture_command);
 			ts_data->gsx_cmd = gesture_command;
-#endif
 
 #if FTS_GESTURE_EN
 			if (fts_gesture_suspend(ts_data) == 0) {
@@ -676,7 +673,7 @@ static int fts_mmi_panel_state(struct device *dev,
 			ret = -EINVAL;
 			break;
 	}
-
+#endif
 	return ret;
 
 }

@@ -434,27 +434,27 @@ static void fts_gesture_report(struct input_dev *input_dev, int gesture_id)
             FTS_INFO("Gesture got but wakeable not set. Skip this gesture.");
             return;
         }
-#ifdef CONFIG_FTS_DOUBLE_TAP_CONTROL
+#ifdef CONFIG_INPUT_TOUCHSCREEN_MMI
         /* report double tap */
         if (gesture == KEY_GESTURE_U) {
             if (fts_data->imports && fts_data->imports->report_gesture) {
-                struct gesture_event_data event;
+                struct gesture_event_data mmi_event;
 
                 FTS_INFO("invoke imported report double tap gesture function\n");
-                event.evcode = 4;
+                mmi_event.evcode = 4;
                 /* call class method */
-                ret = fts_data->imports->report_gesture(&event);
+                ret = fts_data->imports->report_gesture(&mmi_event);
                 ++report_cnt;
             }
 	/* report single tap */
         } else if (gesture == KEY_GESTURE_F1) {
             if (fts_data->imports && fts_data->imports->report_gesture) {
-                struct gesture_event_data event;
+                struct gesture_event_data mmi_event;
 
                 FTS_INFO("invoke imported report single tap gesture function\n");
-                event.evcode = 1;
+                mmi_event.evcode = 1;
                 /* call class method */
-                ret = fts_data->imports->report_gesture(&event);
+                ret = fts_data->imports->report_gesture(&mmi_event);
                 ++report_cnt;
             }
         }
@@ -462,12 +462,12 @@ static void fts_gesture_report(struct input_dev *input_dev, int gesture_id)
         /* report single tap */
         if (gesture == KEY_GESTURE_U) {
             if (fts_data->imports && fts_data->imports->report_gesture) {
-                struct gesture_event_data event;
+                struct gesture_event_data mmi_event;
 
                 FTS_INFO("invoke imported report gesture function\n");
-                event.evcode = 1;
+                mmi_event.evcode = 1;
                 /* call class method */
-                ret = fts_data->imports->report_gesture(&event);
+                ret = fts_data->imports->report_gesture(&mmi_event);
                 ++report_cnt;
             }
         }

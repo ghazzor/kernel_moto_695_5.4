@@ -63,9 +63,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/mmi_wake_lock.h>
 #include "focaltech_common.h"
-#if defined(CONFIG_INPUT_TOUCHSCREEN_MMI)
 #include <linux/touchscreen_mmi.h>
-#endif
 #ifdef FTS_USB_DETECT_EN
 #include <linux/power_supply.h>
 #endif
