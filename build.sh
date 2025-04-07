@@ -15,7 +15,7 @@ export modpath=${AnyKernel3}/modules/vendor/lib/modules
 export ARCH=arm64
 
 if [ -z "$DEVICE" ]; then
-export DEVICE=g84
+export DEVICE=g84_fts
 fi
 
 if [[ -z "$KSU" || "$KSU" = "0" ]]; then
@@ -96,10 +96,10 @@ sed -i 's/\(kernel\/[^: ]*\/\)\([^: ]*\.ko\)/\/vendor\/lib\/modules\/\2/g' ${mod
 #sed -i 's#.*/##; s/\.ko$//' ${AnyKernel3}/modules/vendor/lib/modules/modules.load
 sed -i 's/.*\///; s/\.ko$//' ${modpath}/modules.load
 
-source build.sta/${DEVICE}_mdconf
-for useles_modules in "${modules_to_nuke[@]}"; do
-  grep -vE "$useles_modules" ${modpath}/modules.load > /tmp/templd && mv /tmp/templd ${modpath}/modules.load
-done
+#source build.sta/${DEVICE}_mdconf
+#for useles_modules in "${modules_to_nuke[@]}"; do
+#  grep -vE "$useles_modules" ${modpath}/modules.load > /tmp/templd && mv /tmp/templd ${modpath}/modules.load
+#done
 
 #Zip
 cd ${AnyKernel3}
