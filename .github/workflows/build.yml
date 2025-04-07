@@ -1,0 +1,57 @@
+name: build
+
+on:
+
+  workflow_dispatch:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        device: [g84_fts, g84_gdx]
+    name: "🚧 Build for ${{matrix.device}}"
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: "Asia/Kolkata"
+
+      - name: Setup Toolchains
+        run: |
+          sudo apt update
+          sudo apt install bison flex libssl-dev libarchive-tools -y
+          mkdir -p toolchain
+          cd toolchain
+          echo 'Download antman and sync'
+          bash <(curl -s "https://raw.githubusercontent.com/Neutron-Toolchains/antman/main/antman") -S=05012024
+          echo 'Done'
+
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 30
+
+      - name: Run build
+        run: |
+          DEVICE=${{matrix.device}} KSU=1 ./build.sh
+
+      - name: Upload kernel
+        uses: actions/upload-artifact@v4
+        with:
+          name: O_kernel-${{matrix.device}}
+          path: AnyKernel3/O*.zip
+
+      - name: Upload to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          document: AnyKernel3/O*.zip
+          message: "Build COmpleted"
