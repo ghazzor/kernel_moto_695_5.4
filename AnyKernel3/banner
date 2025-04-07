@@ -5,16 +5,19 @@
 |_| |_| |_|\___/ \__\___/____/|_|  |_|\___/____//_/  |____/ 
  
 DEVICE   : sm6375
-Version  : v0.1
+Version  : v0.2  
  
 (.) Features:
  - Wireguard
- - KSU
+ - KSU NEXT
  - Full LTO
  - Nuked some Debugging
  - Enabled LLVM Polly, vDSO Compat
- - Compiled with Neutron Clang 18.
- - Other minor optimizations etc.
+ - Compiled with Neutron Clang 18 
+ - Inline Optmizations
+ - Debugging Nuked    
+ - Minor optimizations
+ - Full kernel inline (i.e. no modules excet nfc)
 
 (.) Trees: github.com/ghazzor/kernel_moto_695_5.4
 
@@ -22,3 +25,4 @@ Version  : v0.1
  => base trees :@AnandSuresh02
  => KSU : @whyakari
  => kangs from other sm6375 trees
+
