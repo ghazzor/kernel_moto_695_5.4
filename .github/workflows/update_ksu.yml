@@ -1,0 +1,31 @@
+name: Check KernelSU tag update
+
+on:
+  schedule:
+    - cron: '0 12 15,30 * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Check update
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git submodule update --init
+          git submodule update --remote
+          cd KernelSU-Next
+          TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Syncing to $TAG"
+          git checkout $TAG
+          cd ..
+          git add KernelSU-Next
+          git commit -m "KSU-N: sync $TAG"
+          git push
